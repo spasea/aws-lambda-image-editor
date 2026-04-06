@@ -15,7 +15,21 @@ set -euo pipefail
 : "${ECR_REPO:?ECR_REPO is required}"
 : "${IMAGE_TAG:?IMAGE_TAG is required}"
 
+DOCKER_PLATFORM="${DOCKER_PLATFORM:-linux/amd64}"
 image_ref="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}:${IMAGE_TAG}"
 
-echo "Building ${image_ref}"
-echo "This is a scaffold script. Build and push steps are added in a later patch."
+aws ecr get-login-password \
+  --profile "${AWS_PROFILE}" \
+  --region "${AWS_REGION}" \
+  | docker login \
+      --username AWS \
+      --password-stdin "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
+
+docker buildx build \
+  --platform "${DOCKER_PLATFORM}" \
+  --file ops/services/image-editor-lambda/Dockerfile \
+  --tag "${image_ref}" \
+  --push \
+  .
+
+echo "Pushed ${image_ref}"
