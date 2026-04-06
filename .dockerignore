@@ -1,0 +1,7 @@
+.git
+.github
+README.md
+serverless.yml
+npm-debug.log*
+.DS_Store
+
