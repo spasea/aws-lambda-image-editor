@@ -30,6 +30,8 @@ aws ecr get-login-password \
 
 docker buildx build \
   --platform "${DOCKER_PLATFORM}" \
+  --provenance=false \
+  --sbom=false \
   --file ops/services/image-editor-lambda/Dockerfile \
   --tag "${image_ref}" \
   --push \
