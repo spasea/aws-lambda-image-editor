@@ -8,6 +8,7 @@
     "url": "git@github.com:innocode-digital/aws-lambda-image-editor.git"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1024.0",
     "exec-buffer": "^3.2.0",
     "exifr": "^6.0.0",
     "file-type": "^5.2.0",
@@ -20,11 +21,8 @@
     "is-gif": "^3.0.0",
     "is-svg": "^4.2.1",
     "lodash.has": "^4.5.2",
-    "sharp": "^0.27.1",
+    "sharp": "^0.34.5",
     "svgo": "^2.2.0"
   },
-  "scripts": {},
-  "devDependencies": {
-    "aws-sdk": "^2.834.0"
-  }
+  "scripts": {}
 }
